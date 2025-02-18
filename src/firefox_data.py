@@ -4,7 +4,7 @@
 Firefox data extraction
 Python 3.13+
 Date created: February 7th, 2025
-Date modified: -
+Date modified: February 18th, 2025
 """
 
 import getpass
@@ -19,14 +19,17 @@ fileConfig("logging.ini")
 logger = logging.getLogger()
 
 
-def fetch_history_data(output: bool) -> None:
+def fetch_history_data(save: bool) -> None:
     """
     Check the current operating system.
     Invoke the functions that check the database path,
-    read the database file and
-    print the data.
+    read the database file and print the data.
+
+    Args:
+        save (bool): Save the output to a file.
     """
-    logger.debug(f"Output: {output}")
+
+    logger.debug(f"Output: {save}")
 
     os_version = common.system_info()
     history_file = "places.sqlite"
@@ -44,7 +47,7 @@ def fetch_history_data(output: bool) -> None:
 
     desktop_path = "/Users/{0}/Desktop/".format(getpass.getuser())
 
-    if output:
+    if save:
         with open(desktop_path + "history_data.txt", "w") as file:
             for line in history_data:
                 (
@@ -106,8 +109,12 @@ def fetch_history_data(output: bool) -> None:
 
 
 def platform_paths():
+    """
+    Get the path to the Firefox profiles directory.
 
-    # Dictionary with the platform specific data paths
+    Returns:
+        str: The path to the Firefox profiles directory.
+    """
     paths = {
         "Windows 7": "C:\\Users\\{0}\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles".format(
             getpass.getuser()
@@ -130,9 +137,14 @@ def platform_paths():
 def profile_paths(operating_system):
     """
     Check the current operating system.
-    :param operating_system: The current operating system.
-    :return: The path to the Firefox profiles directory.
+
+    Args:
+        operating_system (str): The current operating system.
+
+    Returns:
+        str: The path to the Firefox profiles directory.
     """
+
     profile_path = ""
     platform_path = platform_paths()
 
@@ -155,10 +167,15 @@ def profile_paths(operating_system):
 def firefox_db_path(operating_system, db_file):
     """
     Check the path to the history database file.
-    :param operating_system: The current operating system.
-    :param db_file: The name of the database file.
-    :return: The full path to the database.
+
+    Args:
+        operating_system (str): The current operating system.
+        db_file (str): The name of the database file.
+
+    Returns:
+        _type_: The full path to the database.
     """
+
     profile_path = profile_paths(operating_system)
 
     # Try to find the x.default directory in Profiles folder.
@@ -178,9 +195,13 @@ def firefox_db_path(operating_system, db_file):
 
 def read_history(history_db):
     """
-    Read the history database file (places.sqlite) and
-    show the id, the url and the last visit date.
-    :param history_db: The name of the database file.
+    Read the history database file (places.sqlite)
+
+    Args:
+        history_db (str): The name of the database file.
+
+    Returns:
+        str: The data from the history database.
     """
 
     sql_command = "SELECT * FROM moz_places"

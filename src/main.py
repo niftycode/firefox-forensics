@@ -23,8 +23,11 @@ logger = logging.getLogger()
 def evaluate_args(args) -> None:
     """
     Evaluate the arguments passed by the user.
-    :param args: The parsed arguments
+
+    Args:
+        args (_type_): The arguments passed by the user.
     """
+
     if args.websites:
         logger.debug("Show visited websites")
         output: bool = args.output
@@ -36,7 +39,7 @@ def evaluate_args(args) -> None:
 
 def main() -> None:
     """
-    Entry point.
+    Entry point of the program.
     """
     args_handler = argument_handler.ArgumentHandler()
     args = args_handler.parse()
