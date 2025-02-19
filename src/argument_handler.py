@@ -8,14 +8,15 @@ Date modified: -
 """
 
 import argparse
+from argparse import Namespace
 
 
 class ArgumentHandler:
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Initialization method
         """
-        self.parser = argparse.ArgumentParser(
+        self.parser: argparse.ArgumentParser = argparse.ArgumentParser(
             description="A tool for reading the browser's history file."
         )
         self._setup_arguments()
@@ -36,9 +37,11 @@ class ArgumentHandler:
             "-v", "--version", help="Displays the current version", action="store_true"
         )
 
-    def parse(self):
+    def parse(self) -> Namespace:
         """
         Parse the command-line arguments
-        :return: The parsed arguments
+
+        Returns:
+            _type_: The parsed arguments
         """
         return self.parser.parse_args()
