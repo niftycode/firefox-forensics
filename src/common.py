@@ -8,13 +8,11 @@ Date created: February 7th, 2025
 Date modified: -
 """
 
-import sqlite3
-import platform
-import sys
 import logging
-
+import platform
+import sqlite3
+import sys
 from datetime import datetime as dt
-
 from logging.config import fileConfig
 
 # Add logger config
