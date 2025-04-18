@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-Read data from Firefox browser and extract useful information.
+Read data from the Firefox browser and extract useful information.
 OS: macOS only
 Version: 1.0.0
 Python 3.13+
