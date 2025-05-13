@@ -146,7 +146,7 @@ def profile_paths(operating_system):
     """
 
     profile_path = ""
-    platform_path = platform_paths()
+    platform_path: str = platform_paths()
 
     # Check the operating system
     if operating_system == "Windows 7":
@@ -173,12 +173,12 @@ def firefox_db_path(operating_system, db_file):
         db_file (str): The name of the database file.
 
     Returns:
-        _type_: The full path to the database.
+        str: The full path to the database.
     """
 
     profile_path = profile_paths(operating_system)
 
-    # Try to find the x.default directory in Profiles folder.
+    # Try to find the x.default directory in the Profiles folder.
     try:
         for item in os.listdir(profile_path):
             # Check for the x.default directory
@@ -186,6 +186,9 @@ def firefox_db_path(operating_system, db_file):
             if os.path.isdir(os.path.join(profile_path, item)) and "release" in item:
                 if os.path.isfile(os.path.join(profile_path, item, db_file)):
                     return os.path.join(profile_path, item, db_file)
+                return None
+            return None
+        return None
     except FileNotFoundError as e:
         print(e)
         sys.exit(
