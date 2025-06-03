@@ -2,7 +2,7 @@
 
 """
 Read data from the Firefox browser and extract useful information.
-OS: macOS only
+OS: macOS-only
 Version: 1.0.0
 Python 3.13+
 Date created: February 4th, 2025
@@ -44,6 +44,8 @@ def main() -> None:
     args_handler = argument_handler.ArgumentHandler()
     args = args_handler.parse()
 
+    logger.debug(args)
+    
     evaluate_args(args)
 
 

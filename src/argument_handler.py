@@ -8,8 +8,13 @@ Date modified: -
 """
 
 import argparse
+import logging
+
+from logging.config import fileConfig
 from argparse import Namespace
 
+fileConfig("logging.ini")
+logger = logging.getLogger()
 
 class ArgumentHandler:
     def __init__(self) -> None:
@@ -44,4 +49,5 @@ class ArgumentHandler:
         Returns:
             _type_: The parsed arguments
         """
+        logger.debug("Parsing command-line arguments")
         return self.parser.parse_args()
