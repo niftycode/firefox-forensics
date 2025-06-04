@@ -5,7 +5,7 @@ Common functions
 Version: 1.0.0
 Python 3.13+
 Date created: February 7th, 2025
-Date modified: -
+Date modified: June 4th, 2025
 """
 
 import logging
@@ -38,8 +38,13 @@ def fetch_data(db, command):
 
 def system_info():
     """
-    Check the running operating system.
-    :return: Operating system name (and Windows version).
+    Determines the operating system of the host machine and provides the system
+    identity. Depending on the system type, it returns the name of the operating
+    system (e.g., macOS, Linux) or a combination of the system name and version
+    (e.g., Windows 10).
+
+    :return: The name or identifier of the operating system.
+    :rtype: str
     """
     if platform.system() == "Darwin":
         return "macOS"
@@ -48,6 +53,7 @@ def system_info():
     elif platform.system() == "Windows":
         version = platform.system() + " " + platform.release()
         return version
+    return None
 
 
 def convert_epoch(timestamp):

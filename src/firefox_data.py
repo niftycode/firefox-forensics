@@ -4,7 +4,7 @@
 Firefox data extraction
 Python 3.13+
 Date created: February 7th, 2025
-Date modified: February 18th, 2025
+Date modified: June 4th, 2025
 """
 
 import getpass
@@ -21,14 +21,21 @@ logger = logging.getLogger()
 
 def fetch_history_data(save: bool) -> None:
     """
-    Check the current operating system.
-    Invoke the functions that check the database path,
-    read the database file and print the data.
+    Fetches browsing history data from the local Firefox database and optionally saves it to a file.
 
-    Args:
-        save (bool): Save the output to a file.
+    This function retrieves data from the Firefox `places.sqlite` database, which contains
+    browsing and history information. The retrieved history items, including the URL,
+    ID, and the date of the last visit, are displayed on the console. Optionally, if the
+    `save` parameter is set to True, the history is saved to a text file on the desktop
+    directory of the current user.
+
+    :param save: A boolean flag that indicates whether the browsing history data
+        should be saved to a file. If True, the data is written to 'history_data.txt'
+        on the desktop. If False, only console output is generated.
+    :type save: Bool
+    :return: This function does not return any value.
+    :rtype: None
     """
-
     logger.debug(f"Output: {save}")
 
     os_version = common.system_info()
@@ -110,10 +117,16 @@ def fetch_history_data(save: bool) -> None:
 
 def platform_paths():
     """
-    Get the path to the Firefox profiles directory.
+    Determines and returns the file paths for Mozilla Firefox profiles according
+    to the user's operating system.
 
-    Returns:
-        str: The path to the Firefox profiles directory.
+    This function generates platform-specific file paths based on the current
+    user's profile and returns a dictionary mapping operating system names
+    to the file paths.
+
+    :return: A dictionary containing operating system names as keys and the
+        corresponding Firefox profile paths as values.
+    :rtype: dict
     """
     paths = {
         "Windows 7": "C:\\Users\\{0}\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles".format(
@@ -136,15 +149,22 @@ def platform_paths():
 
 def profile_paths(operating_system):
     """
-    Check the current operating system.
+    Determines the profile path for the given operating system. The function checks the
+    provided operating system and maps it to the corresponding profile path based on the
+    predefined platform paths. If the operating system is not supported, it prints an
+    appropriate message and returns an empty string.
 
-    Args:
-        operating_system (str): The current operating system.
+    :param operating_system: The name of the operating system whose profile path needs
+        to be determined.
+    :type operating_system: Str
 
-    Returns:
-        str: The path to the Firefox profiles directory.
+    :raises KeyError: If the operating system is unknown and cannot be mapped to a
+        profile path.
+
+    :return: The profile path corresponding to the provided operating system. If the
+        operating system is unsupported or unknown, returns an empty string.
+    :rtype: str
     """
-
     profile_path = ""
     platform_path: str = platform_paths()
 
@@ -166,16 +186,21 @@ def profile_paths(operating_system):
 
 def firefox_db_path(operating_system, db_file):
     """
-    Check the path to the history database file.
+    Determine the path to a specified database file within a Firefox profile directory for the given
+    operating system. The function searches for a profile folder that includes the text 'release'
+    and verifies if the specified database file exists within that profile folder. If no matching
+    profile folder or database file is found, the function returns None.
 
-    Args:
-        operating_system (str): The current operating system.
-        db_file (str): The name of the database file.
-
-    Returns:
-        str: The full path to the database.
+    :param operating_system: A string indicating the operating system type:
+    (e.g., 'windows', 'linux', 'macOS'). This is used to resolve the
+    appropriate base path for Firefox profiles.
+    :type operating_system: Str
+    :param db_file: The name of the database file to locate within the Firefox
+    profile directory.
+    :type db_file: str
+    :return: The full path to the specified database file if found, otherwise None.
+    :rtype: str or None
     """
-
     profile_path = profile_paths(operating_system)
 
     # Try to find the x.default directory in the Profiles folder.
@@ -198,15 +223,17 @@ def firefox_db_path(operating_system, db_file):
 
 def read_history(history_db):
     """
-    Read the history database file (places.sqlite)
+    Fetches browsing history records from the specified database.
 
-    Args:
-        history_db (str): The name of the database file.
+    This function connects to the provided SQLite database file, executes a SQL
+    command to retrieve all browsing history details stored in the ``moz_places``
+    table, and returns the fetched data.
 
-    Returns:
-        str: The data from the history database.
+    :param history_db: Path to the SQLite database containing the browsing history.
+    :type history_db: str
+    :return: List of records fetched from the ``moz_places`` table.
+    :rtype: list
     """
-
     sql_command = "SELECT * FROM moz_places"
     rval = common.fetch_data(history_db, sql_command)
     return rval

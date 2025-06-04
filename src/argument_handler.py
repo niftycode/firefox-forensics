@@ -4,7 +4,7 @@
 Process user input
 Python 3.13+
 Date created: February 5th, 2025
-Date modified: -
+Date modified: June 4th, 2025
 """
 
 import argparse
@@ -16,10 +16,12 @@ from argparse import Namespace
 fileConfig("logging.ini")
 logger = logging.getLogger()
 
+
 class ArgumentHandler:
     def __init__(self) -> None:
         """
-        Initialization method
+        Initialize a class instance with an argparse.ArgumentParser for reading browser
+        history files and set up the required arguments.
         """
         self.parser: argparse.ArgumentParser = argparse.ArgumentParser(
             description="A tool for reading the browser's history file."
@@ -31,7 +33,11 @@ class ArgumentHandler:
         Define all arguments here
         """
         self.parser.add_argument(
-            "-w", "--websites", help="Show visited websites", action="store_true"
+            "-w",
+            "--websites",
+            required=True,
+            help="Show visited websites",
+            action="store_true",
         )
 
         self.parser.add_argument(
@@ -47,7 +53,7 @@ class ArgumentHandler:
         Parse the command-line arguments
 
         Returns:
-            _type_: The parsed arguments
+            parser (argparse.ArgumentParser): The parsed arguments
         """
         logger.debug("Parsing command-line arguments")
         return self.parser.parse_args()

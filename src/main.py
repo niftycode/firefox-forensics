@@ -6,10 +6,11 @@ OS: macOS-only
 Version: 1.0.0
 Python 3.13+
 Date created: February 4th, 2025
-Date modified: February 7th, 2025
+Date modified: June 4th, 2025
 """
 
 import logging
+
 from logging.config import fileConfig
 
 from src import argument_handler
@@ -22,16 +23,21 @@ logger = logging.getLogger()
 
 def evaluate_args(args) -> None:
     """
-    Evaluate the arguments passed by the user.
+    Evaluates the provided arguments and calls respective functions or handles
+    logic based on the arguments. This includes fetching data or displaying
+    version information based on the flags provided.
 
-    Args:
-        args (_type_): The arguments passed by the user.
+    :param args: The arguments are provided from the command-line interface. The
+        object is expected to have properties `websites`, `output`, and `version`.
+
+    :return: None
     """
-
     if args.websites:
-        logger.debug("Show visited websites")
-        output: bool = args.output
-        firefox_data.fetch_history_data(output)
+
+        if args.output:
+            firefox_data.fetch_history_data(save=True)
+        else:
+            firefox_data.fetch_history_data(save=False)
     if args.version:
         logger.debug("Displays the current version")
         info.show_version()
@@ -44,8 +50,6 @@ def main() -> None:
     args_handler = argument_handler.ArgumentHandler()
     args = args_handler.parse()
 
-    logger.debug(args)
-    
     evaluate_args(args)
 
 
