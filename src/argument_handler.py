@@ -50,10 +50,13 @@ class ArgumentHandler:
 
     def parse(self) -> Namespace:
         """
-        Parse the command-line arguments
+        Parses command-line arguments provided to the program using the defined parser and
+        returns the resulting Namespace object. This method processes the arguments
+        based on how the parser was configured previously and encapsulates them into a
+        Namespace object.
 
-        Returns:
-            parser (argparse.ArgumentParser): The parsed arguments
+        :return: The Namespace object containing the parsed command-line arguments as attributes
+        :rtype: Namespace
         """
         logger.debug("Parsing command-line arguments")
         return self.parser.parse_args()
