@@ -229,7 +229,7 @@ def read_history(history_db: str) -> list:
     """
     Fetches browsing history records from the specified database.
 
-    This function connects to the provided SQLite database file, executes a SQL
+    This function connects to the provided SQLite database file, executes an SQL
     command to retrieve all browsing history details stored in the ``moz_places``
     table, and returns the fetched data.
 

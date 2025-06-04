@@ -24,7 +24,7 @@ def fetch_data(db, command):
     """
     Send queries to the sqlite database and return the result.
     :param db: The sqlite database
-    :param command: The SQL command
+    :param command: The SQL commands
     :return: The data from the sqlite database
     """
     logger.debug(f"Fetching data from {db}")

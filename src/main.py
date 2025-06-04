@@ -23,7 +23,7 @@ logger = logging.getLogger()
 
 def evaluate_args(args) -> None:
     """
-    Evaluates the provided arguments and calls respective functions or handles
+    Evaluates the provided arguments and calls the respective functions or handles
     logic based on the arguments. This includes fetching data or displaying
     version information based on the flags provided.
 

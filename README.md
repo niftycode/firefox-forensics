@@ -6,19 +6,30 @@
 ![](https://img.shields.io/pypi/v/firefox-forensics)
 ![GitHub last commit](https://img.shields.io/github/last-commit/niftycode/firefox-forensics)
 
-A simple program to fetch history data from the SQLite database of the Firefox browser.
+This is a simple forensic tool written in Python. Use this tool to fetch the content (id, url, date of last visit) from the `places.sqlite` database file of the Firefox browser on macOS.
 
-## Operating System
+## Background
 
-macOS
+Firefox stores a variety of data in a directory called "Profiles." This directory also contains the `places.sqlite` database, which holds the browsing history. This program accesses that database and reads the `moz_places` table. It then displays three entries in the terminal: the ID, the visited website, and the date.
 
 ## Requirements
 
-Python = 3.13
+* Python 3.13 (It will probably work with other versions too, but I haven't tested it.)
+* macOS
 
 ## Install
 
-	pip3 install firefox-forensics
+    pip3 install firefox-forensics
+
+## Usage
+
+To display the ID, the visited website and the date in the terminal, execute the following command:
+
+    firefox-forensics -w
+
+If this data should also be saved in a file on the desktop, the option `-o` must be added:
+
+    firefox-forensics -w -o
 
 ## Changelog
 
