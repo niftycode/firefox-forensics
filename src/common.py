@@ -27,6 +27,7 @@ def fetch_data(db, command):
     :param command: The SQL command
     :return: The data from the sqlite database
     """
+    logger.debug(f"Fetching data from {db}")
     try:
         conn = sqlite3.connect(db)
         cur = conn.cursor()

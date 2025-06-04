@@ -41,6 +41,7 @@ def fetch_history_data(save: bool) -> None:
     os_version = common.system_info()
     history_file = "places.sqlite"
     db = firefox_db_path(os_version, history_file)
+    logger.debug(f"Database: {db}")
     print()
     print("The path to the database is: {}".format(db))
     print()
@@ -115,7 +116,7 @@ def fetch_history_data(save: bool) -> None:
         print("No output file created.")
 
 
-def platform_paths():
+def platform_paths() -> dict[str, str]:
     """
     Determines and returns the file paths for Mozilla Firefox profiles according
     to the user's operating system.
@@ -147,7 +148,7 @@ def platform_paths():
     return paths
 
 
-def profile_paths(operating_system):
+def profile_paths(operating_system: str) -> str:
     """
     Determines the profile path for the given operating system. The function checks the
     provided operating system and maps it to the corresponding profile path based on the
@@ -165,8 +166,8 @@ def profile_paths(operating_system):
         operating system is unsupported or unknown, returns an empty string.
     :rtype: str
     """
-    profile_path = ""
-    platform_path: str = platform_paths()
+    profile_path: str = ""
+    platform_path: dict[str, str] = platform_paths()
 
     # Check the operating system
     if operating_system == "Windows 7":
@@ -184,7 +185,7 @@ def profile_paths(operating_system):
     return profile_path
 
 
-def firefox_db_path(operating_system, db_file):
+def firefox_db_path(operating_system: str, db_file: str) -> str | None:
     """
     Determine the path to a specified database file within a Firefox profile directory for the given
     operating system. The function searches for a profile folder that includes the text 'release'
@@ -199,21 +200,24 @@ def firefox_db_path(operating_system, db_file):
     profile directory.
     :type db_file: str
     :return: The full path to the specified database file if found, otherwise None.
-    :rtype: str or None
+    :rtype: str
     """
-    profile_path = profile_paths(operating_system)
+    profile_path: str = profile_paths(operating_system)
+    full_path: str = ""
 
     # Try to find the x.default directory in the Profiles folder.
     try:
         for item in os.listdir(profile_path):
             # Check for the x.default directory
             # and return the database file's path
-            if os.path.isdir(os.path.join(profile_path, item)) and "release" in item:
-                if os.path.isfile(os.path.join(profile_path, item, db_file)):
-                    return os.path.join(profile_path, item, db_file)
-                return None
-            return None
-        return None
+            if (
+                os.path.isdir(os.path.join(profile_path, item))
+                and "release" in item
+                and os.path.isfile(os.path.join(profile_path, item, db_file))
+            ):
+                # return os.path.join(profile_path, item, db_file)
+                full_path = os.path.join(profile_path, item, db_file)
+        return full_path
     except FileNotFoundError as e:
         print(e)
         sys.exit(
@@ -221,7 +225,7 @@ def firefox_db_path(operating_system, db_file):
         )
 
 
-def read_history(history_db):
+def read_history(history_db: str) -> list:
     """
     Fetches browsing history records from the specified database.
 
