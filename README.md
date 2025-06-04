@@ -1,7 +1,7 @@
 # firefox-forensics
 
 ![Static Badge](https://img.shields.io/badge/python-3.13-blue)
-![](https://img.shields.io/github/license/niftycode/firefox-forensics)
+![GitHub License](https://img.shields.io/github/license/niftycode/firefox-forensics)
 ![](https://img.shields.io/github/issues/niftycode/firefox-forensics.svg?style=flat)
 ![](https://img.shields.io/pypi/v/firefox-forensics)
 ![GitHub last commit](https://img.shields.io/github/last-commit/niftycode/firefox-forensics)
