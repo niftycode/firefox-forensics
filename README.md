@@ -1,6 +1,5 @@
 # firefox-forensics
 
-![Static Badge](https://img.shields.io/badge/python-3.12-blue)
 ![Static Badge](https://img.shields.io/badge/python-3.13-blue)
 ![](https://img.shields.io/github/license/niftycode/firefox-forensics)
 ![](https://img.shields.io/github/issues/niftycode/firefox-forensics.svg?style=flat)
