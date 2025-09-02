@@ -4,7 +4,7 @@
 Firefox data extraction
 Python 3.13+
 Date created: February 7th, 2025
-Date modified: June 4th, 2025
+Date modified: September 2nd, 2025
 """
 
 import getpass
@@ -40,13 +40,13 @@ def fetch_history_data(save: bool) -> None:
 
     os_version = common.system_info()
     history_file = "places.sqlite"
-    db = firefox_db_path(os_version, history_file)
+    db = firefox_db_path(os_version, history_file)  # type: ignore
     logger.debug(f"Database: {db}")
     print()
     print("The path to the database is: {}".format(db))
     print()
 
-    history_data = read_history(db)
+    history_data = read_history(db)  # type: ignore
 
     print()
     print("Show the id, the URL and the last date:")
