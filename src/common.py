@@ -39,10 +39,7 @@ def fetch_data(db, command):
 
 def system_info():
     """
-    Determines the operating system of the host machine and provides the system
-    identity. Depending on the system type, it returns the name of the operating
-    system (e.g., macOS, Linux) or a combination of the system name and version
-    (e.g., Windows 10).
+    Determines the operating system of the host machine and provides the system identity. Depending on the system type, it returns the name of the operating system (e.g., macOS, Linux) or a combination of the system name and version (e.g., Windows 10).
 
     :return: The name or identifier of the operating system.
     :rtype: str
