@@ -73,6 +73,18 @@ def convert_epoch(timestamp):
 
 
 def copy_database(db_path: str):
+    """
+    Copies a database file to the user's desktop.
+
+    This function takes the path of a database file, copies it to the user's
+    desktop, and preserves the metadata of the original file during the copy
+    process. If the file cannot be found or any other exception occurs, it
+    prints an appropriate error message.
+
+    :param db_path: Path to the database file to be copied.
+    :type db_path: str
+    :return: None
+    """
     try:
         desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
 
