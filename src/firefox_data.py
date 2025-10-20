@@ -163,7 +163,7 @@ def profile_paths(operating_system: str) -> str:
         profile path.
 
     :return: The profile path corresponding to the provided operating system. If the
-        operating system is unsupported or unknown, returns an empty string.
+        operating system is unsupported or unknown, it returns an empty string.
     :rtype: str
     """
     profile_path: str = ""
@@ -195,7 +195,7 @@ def firefox_db_path(operating_system: str, db_file: str) -> str | None:
     :param operating_system: A string indicating the operating system type:
     (e.g., 'windows', 'linux', 'macOS'). This is used to resolve the
     appropriate base path for Firefox profiles.
-    :type operating_system: Str
+    :type operating_system: str
     :param db_file: The name of the database file to locate within the Firefox
     profile directory.
     :type db_file: str

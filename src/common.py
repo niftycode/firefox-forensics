@@ -5,7 +5,7 @@ Common functions
 Version: 1.0.0
 Python 3.13+
 Date created: February 7th, 2025
-Date modified: June 4th, 2025
+Date modified: October 20th, 2025
 """
 
 import logging
@@ -34,15 +34,17 @@ def fetch_data(db, command):
         cur.execute(command)
         return cur.fetchall()
     except Exception as e:
-        sys.exit(f"Error reading the database: {e}")
+        sys.exit(
+            f"Error reading the database: {e}\nPlease close the Firefox browser and try again."
+        )
 
 
-def system_info():
+def system_info() -> str | None:
     """
     Determines the operating system of the host machine and provides the system identity. Depending on the system type, it returns the name of the operating system (e.g., macOS, Linux) or a combination of the system name and version (e.g., Windows 10).
 
     :return: The name or identifier of the operating system.
-    :rtype: str
+    :rtype: str | None
     """
     if platform.system() == "Darwin":
         return "macOS"
