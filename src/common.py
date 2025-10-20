@@ -9,7 +9,9 @@ Date modified: October 20th, 2025
 """
 
 import logging
+import os
 import platform
+import shutil
 import sqlite3
 import sys
 from datetime import datetime as dt
@@ -68,3 +70,17 @@ def convert_epoch(timestamp):
         rval = "No date available (NULL value in database)."
         print(e)
     return rval
+
+
+def copy_database(db_path: str):
+    try:
+        desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
+
+        shutil.copy2(db_path, desktop_path)  # copy2 preserves metadata
+
+        print(f"Successfully copied database to {desktop_path}")
+
+    except FileNotFoundError:
+        print(f"Error: Found no database at {db_path}")
+    except Exception as e:
+        print(f"Error: {e}")

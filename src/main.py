@@ -33,7 +33,6 @@ def evaluate_args(args) -> None:
     :return: None
     """
     if args.websites:
-
         if args.output:
             firefox_data.fetch_history_data(save=True)
         else:

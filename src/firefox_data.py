@@ -42,11 +42,16 @@ def fetch_history_data(save: bool) -> None:
     history_file = "places.sqlite"
     db = firefox_db_path(os_version, history_file)  # type: ignore
     logger.debug(f"Database: {db}")
+
     print()
     print("The path to the database is: {}".format(db))
     print()
 
-    history_data = read_history(db)  # type: ignore
+    # Copy database to desktop
+    common.copy_database(db)
+    copied_db = os.path.join(os.path.expanduser("~"), "Desktop", history_file)
+
+    history_data = read_history(copied_db)  # type: ignore
 
     print()
     print("Show the id, the URL and the last date:")

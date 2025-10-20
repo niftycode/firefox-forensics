@@ -10,11 +10,11 @@ This is a simple forensic tool written in Python. Use this tool to fetch the con
 
 ## Background
 
-Firefox stores a variety of data in a directory called "Profiles." This directory also contains the `places.sqlite` database, which holds the browsing history. This program accesses that database and reads the `moz_places` table. It then displays three entries in the terminal: the ID, the visited website, and the date.
+Firefox stores a variety of data in a directory called "Profiles." This directory also contains the `places.sqlite` database, which holds the browsing history. This program copies the `places.sqlite` database to the Desktop. Then it opens the database and reads the `moz_places` table. Three entries are displayed in the Terminal: the ID, the visited website, and the date.
 
 ## Requirements
 
-* Python 3.13 (It will probably work with other versions too, but I haven't tested it.)
+* Python 3.13+ (It will probably work with other versions too, but I haven't tested it.)
 * macOS
 
 ## Install
@@ -23,7 +23,7 @@ Firefox stores a variety of data in a directory called "Profiles." This director
 
 ## Usage
 
-To display the ID, the visited website and the date in the terminal, execute the following command:
+To display the ID, the visited website, and the date in the terminal, execute the following command:
 
     firefox-forensics -w
 
