@@ -1,5 +1,9 @@
 # Changelog
 
+## November 7th, 2025
+
+To create a text file containing the data, you now only need to use the `-o` option (instead of `-w -o`).
+
 ## June 4th, 2025
 
 publish version 1.0.0-beta

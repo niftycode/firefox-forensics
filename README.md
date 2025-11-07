@@ -1,6 +1,7 @@
 # firefox-forensics
 
 ![Static Badge](https://img.shields.io/badge/python-3.13-blue)
+![Static Badge](https://img.shields.io/badge/python-3.14-blue)
 ![GitHub License](https://img.shields.io/github/license/niftycode/firefox-forensics)
 ![](https://img.shields.io/github/issues/niftycode/firefox-forensics.svg?style=flat)
 ![](https://img.shields.io/pypi/v/firefox-forensics)
@@ -27,9 +28,11 @@ To display the ID, the visited website, and the date in the terminal, execute th
 
     firefox-forensics -w
 
-If this data should also be saved in a file on the desktop, the option `-o` must be added:
+If this data should also be saved in a text file on the desktop, the option `-o` must be added:
 
-    firefox-forensics -w -o
+    firefox-forensics -o
+
+This program does not read the original database (`places.sqlite`), but first creates a copy on the desktop. The data is then read from this copied database.
 
 ## Changelog
 

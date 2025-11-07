@@ -33,10 +33,9 @@ def evaluate_args(args) -> None:
     :return: None
     """
     if args.websites:
-        if args.output:
-            firefox_data.fetch_history_data(save=True)
-        else:
-            firefox_data.fetch_history_data(save=False)
+        firefox_data.fetch_history_data(save=False)
+    if args.output:
+        firefox_data.fetch_history_data(save=True)
     if args.version:
         logger.debug("Displays the current version")
         info.show_version()

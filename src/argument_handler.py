@@ -35,7 +35,7 @@ class ArgumentHandler:
         self.parser.add_argument(
             "-w",
             "--websites",
-            required=True,
+            required=False,
             help="Show visited websites",
             action="store_true",
         )
